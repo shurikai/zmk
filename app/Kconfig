@@ -9,10 +9,6 @@ config USB_DEVICE_PRODUCT
 config BT_DEVICE_NAME
 	default ZMK_KEYBOARD_NAME
 
-config ZMK_KSCAN_EVENT_QUEUE_SIZE
-	int "Size of the event queue for KSCAN events to buffer events"
-	default 4
-
 menu "HID Output Types"
 
 menuconfig ZMK_USB
@@ -162,14 +158,6 @@ endif
 
 endmenu
 
-config ZMK_KSCAN_MOCK_DRIVER
-	bool "Enable mock kscan driver to simulate key presses"
-	default n
-
-
-config ZMK_KSCAN_COMPOSITE_DRIVER
-	bool "Enable composite kscan driver to combine kscan devices"
-	default n
 
 menu "ZMK Actions"
 
@@ -202,6 +190,23 @@ endif
 
 endmenu
 
+menu "ZMK KSCAN Driver Configuration"
+
+config ZMK_KSCAN_EVENT_QUEUE_SIZE
+	int "Size of the event queue for KSCAN events to buffer events"
+	default 4
+
+config ZMK_KSCAN_MOCK_DRIVER
+	bool "Enable mock kscan driver to simulate key presses"
+	default n
+
+
+config ZMK_KSCAN_COMPOSITE_DRIVER
+	bool "Enable composite kscan driver to combine kscan devices"
+	default n
+
+endmenu
+
 config HEAP_MEM_POOL_SIZE
 	default 8192
 
@@ -221,6 +226,7 @@ rsource "boards/shields/*/Kconfig.shield"
 
 osource "$(ZMK_CONFIG)/boards/shields/*/Kconfig.defconfig"
 osource "$(ZMK_CONFIG)/boards/shields/*/Kconfig.shield"
-
+menu "Zephyr Stuff"
 source "Kconfig.zephyr"
+endmenu
 
